@@ -177,7 +177,10 @@ function searchIngredients(allDishes) {
 function generateCuisineDishName(allDishes) {
     alert("Combining cuisine and dish names...")
     // TODO #5: Apply the concatenatorFunction to each dish in allDishes, then log to the console the modified result
+    let cuisineName = allDishes.filter((allDishes) => allDishes.cuisine && allDishes.name);
+    let result = cuisineName
     alert("Successfully combined cuisine and dish names!  Check the console for full output.")
+    console.log(result)
 }
 
 // <<<<<<<<<<<<<<<<< EMAIL AND TEXT MARKETING MESSAGES <<<<<<<<<<<<<<<<<
@@ -190,7 +193,7 @@ function emailMessage(dishOfTheDay) {
     Thank you for subscribing to email alert messages!
     Today's Dish of the day is:
 
-    <DISH OF THE DAY HERE>
+    ${todaysSpecialDish.name}
 
     We hope to see you in soon!
 
@@ -211,7 +214,7 @@ function textMessage(dishOfTheDay) {
     This is an automated text message alert.
     Today's Dish of the day is:
 
-    <DISH OF THE DAY HERE>
+    ${todaysSpecialDish.name};
 
     We hope to see you in soon!
 
@@ -227,6 +230,9 @@ function textMessage(dishOfTheDay) {
 function generateMarketingMessage(dishOfTheDay, messageTypeCallback) {
     alert('Sending final message to all 389 customers...')
     // TODO #7: Call the passed-in callback function on the dishOfTheDay.  Save the result as a variable
+    console.log(`${todaysSpecialDish.name}`);
+    messageTypeCallback();
+   
     // Then, log that result to the console
     alert('Success!  Check the console for a copy of the final marketing message!')
 }
@@ -277,10 +283,14 @@ function runApp(allDishes, specialDish) {
             break
         case "6":
             // TODO #8: Call the appropriate function to generate the marketing text message.  
+            let autoTextMessage = textMessage(allDishes)
+            console.log(autoTextMessage)
             // You will need to provide today's dish and the appropriate callback function as arguments!
             break
         case "7":
-            // TODO #9: Call the appropriate function to generate the marketing email message.  
+            // TODO #9: Call the appropriate function to generate the marketing email message. 
+            let autoEmailMessage = emailMessage(allDishes)
+            console.log(autoEmailMessage) 
             // You will need to provide today's dish and the appropriate callback function as arguments!
             break
         case "Exit":
