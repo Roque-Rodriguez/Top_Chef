@@ -157,7 +157,7 @@ function findItalianFood(allDishes) {
 function searchCuisines(allDishes) {
     alert("Searching for dishes by cuisine...")
     // TODO #3: Gather user input for a cuisine to search for, then filter for all dishes matching this cuisine type
-    let userInput = prompt("Enter a cuisine to search for: \n (Options are: Italian, Mexican, French, Irish, Vegetarian, Hungarian) ");
+    let userInput = customPrompt("Enter a cuisine to search for: \n (Options are: Italian, Mexican, French, Irish, Vegetarian, Hungarian) ", ["Italian", "Mexican", "French", "Irish", "Vegetarian", "Hungarian"]);
     let filteredDishes = allDishes.filter((allDishes) => allDishes.cuisine.includes(userInput));
 
 
@@ -168,7 +168,7 @@ function searchCuisines(allDishes) {
 function searchIngredients(allDishes) {
     alert("Searching for dishes by ingredient...")
     // TODO #4: Gather user input for an ingredient to search for, then filter for all dishes that INCLUDE this ingredient in their ingredients array property
-    let userInput = prompt("Which ingrediant would you like use for your recipe: ");
+    let userInput = customPrompt("Which ingrediant would you like use for your recipe: ", ["corn", "cheese","tomato", "chickpea", "beef", "cabbage", "flour", "sugar", "corn", "cheese", "tomato",]);
     let filteredIngrediant = allDishes.filter((allDishes) => allDishes.ingredients.includes(userInput));
     alert("Found all dishes that contain the ingredient search term!  Check the console for full output")
     return filteredIngrediant
@@ -193,7 +193,7 @@ function emailMessage(dishOfTheDay) {
     Thank you for subscribing to email alert messages!
     Today's Dish of the day is:
 
-    ${todaysSpecialDish.name}
+    ${dishOfTheDay}
 
     We hope to see you in soon!
 
@@ -214,7 +214,7 @@ function textMessage(dishOfTheDay) {
     This is an automated text message alert.
     Today's Dish of the day is:
 
-    ${todaysSpecialDish.name};
+    ${dishOfTheDay};
 
     We hope to see you in soon!
 
@@ -230,8 +230,9 @@ function textMessage(dishOfTheDay) {
 function generateMarketingMessage(dishOfTheDay, messageTypeCallback) {
     alert('Sending final message to all 389 customers...')
     // TODO #7: Call the passed-in callback function on the dishOfTheDay.  Save the result as a variable
-    console.log(`${todaysSpecialDish.name}`);
-    messageTypeCallback();
+    //go back to week 2 function lecture and lab can do lab in JS
+    messageTypeCallback(dishOfTheDay);
+    console.log(messageTypeCallback)
    
     // Then, log that result to the console
     alert('Success!  Check the console for a copy of the final marketing message!')
@@ -283,13 +284,13 @@ function runApp(allDishes, specialDish) {
             break
         case "6":
             // TODO #8: Call the appropriate function to generate the marketing text message.  
-            let autoTextMessage = textMessage(allDishes)
+            let autoTextMessage = textMessage(todaysSpecialDish.name)
             console.log(autoTextMessage)
             // You will need to provide today's dish and the appropriate callback function as arguments!
             break
         case "7":
             // TODO #9: Call the appropriate function to generate the marketing email message. 
-            let autoEmailMessage = emailMessage(allDishes)
+            let autoEmailMessage = emailMessage(todaysSpecialDish.name)
             console.log(autoEmailMessage) 
             // You will need to provide today's dish and the appropriate callback function as arguments!
             break
