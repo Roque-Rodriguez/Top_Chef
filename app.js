@@ -143,20 +143,35 @@ function findMexicanFood(allDishes) {
 
 function findItalianFood(allDishes) {
     alert("Searching for Italian dishes...")
-    // TODO #2: Filter all dishes for those that have a cuisine type of Italian
+    let results = allDishes.filter(function (el) {
+        if (el.cuisine === "Italian") {
+            return true;
+        } else {
+            return false;
+        }
+    });
     alert("Found all Italian dishes!  Check the console for full output")
+    return results
 }
 
 function searchCuisines(allDishes) {
     alert("Searching for dishes by cuisine...")
     // TODO #3: Gather user input for a cuisine to search for, then filter for all dishes matching this cuisine type
+    let userInput = prompt("Enter a cuisine to search for: \n (Options are: Italian, Mexican, French, Irish, Vegetarian, Hungarian) ");
+    let filteredDishes = allDishes.filter((allDishes) => allDishes.cuisine.includes(userInput));
+
+
     alert("Found all dishes matching the cuisine search term!  Check the console for full output")
+    return filteredDishes;
 }
 
 function searchIngredients(allDishes) {
     alert("Searching for dishes by ingredient...")
     // TODO #4: Gather user input for an ingredient to search for, then filter for all dishes that INCLUDE this ingredient in their ingredients array property
+    let userInput = prompt("Which ingrediant would you like use for your recipe: ");
+    let filteredIngrediant = allDishes.filter((allDishes) => allDishes.ingredients.includes(userInput));
     alert("Found all dishes that contain the ingredient search term!  Check the console for full output")
+    return filteredIngrediant
 }
 
 function generateCuisineDishName(allDishes) {
