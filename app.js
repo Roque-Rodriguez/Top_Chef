@@ -168,7 +168,7 @@ function searchCuisines(allDishes) {
 function searchIngredients(allDishes) {
     alert("Searching for dishes by ingredient...")
     // TODO #4: Gather user input for an ingredient to search for, then filter for all dishes that INCLUDE this ingredient in their ingredients array property
-    let userInput = customPrompt("Which ingrediant would you like use for your recipe: ", ["corn", "cheese","tomato", "chickpea", "beef", "cabbage", "flour", "sugar", "corn", "cheese", "tomato",]);
+    let userInput = customPrompt("Which ingrediant would you like use for your recipe: \n Your choices are: corn, cheese,tomato, chickpea, beef, cabbage, flour, sugar, corn, cheese, tomato",  ["corn", "cheese","tomato", "chickpea", "beef", "cabbage", "flour", "sugar", "corn", "cheese", "tomato",]);
     let filteredIngrediant = allDishes.filter((allDishes) => allDishes.ingredients.includes(userInput));
     alert("Found all dishes that contain the ingredient search term!  Check the console for full output")
     return filteredIngrediant
@@ -177,12 +177,15 @@ function searchIngredients(allDishes) {
 function generateCuisineDishName(allDishes) {
     alert("Combining cuisine and dish names...")
     // TODO #5: Apply the concatenatorFunction to each dish in allDishes, then log to the console the modified result
-    let cuisineName = allDishes.filter((allDishes) => allDishes.cuisine && allDishes.name);
-    let result = cuisineName
+    let cuisineName = allDishes.filter(allDishes => allDishes.name && allDishes.cuisine);
+
+    let result = cuisineName.map((allDishes)=> {
+        return `${allDishes.cuisine} ${allDishes.name}`;
+    }).join(' \n ');
     alert("Successfully combined cuisine and dish names!  Check the console for full output.")
     console.log(result)
 }
-
+//let cuisineName = allDishes.filter((allDishes) => allDishes.name && allDishes.cuisine);
 // <<<<<<<<<<<<<<<<< EMAIL AND TEXT MARKETING MESSAGES <<<<<<<<<<<<<<<<<
 
 function emailMessage(dishOfTheDay) {
@@ -229,11 +232,14 @@ function textMessage(dishOfTheDay) {
 
 function generateMarketingMessage(dishOfTheDay, messageTypeCallback) {
     alert('Sending final message to all 389 customers...')
-    // TODO #7: Call the passed-in callback function on the dishOfTheDay.  Save the result as a variable
-    //go back to week 2 function lecture and lab can do lab in JS
-    messageTypeCallback(dishOfTheDay);
-    console.log(messageTypeCallback)
    
+    let dish = dishOfTheDay
+    let marketingMessage = messageTypeCallback(dish);
+    console.log(`Final marketing message: ${marketingMessage}`);
+    
+    // TODO #7: Call the passed-in callback function on the dishOfTheDay.  Save the result as a variable
+   //I feel like I should use a if statement and if its an email marketMessage should be renamed to marketEmailMessage and then make a text one called marketTextMesssage.  
+   //went thru week 2 3 times.
     // Then, log that result to the console
     alert('Success!  Check the console for a copy of the final marketing message!')
 }
@@ -284,14 +290,14 @@ function runApp(allDishes, specialDish) {
             break
         case "6":
             // TODO #8: Call the appropriate function to generate the marketing text message.  
-            let autoTextMessage = textMessage(todaysSpecialDish.name)
-            console.log(autoTextMessage)
+            
+            generateMarketingMessage(todaysSpecialDish.name,textMessage)
+           
             // You will need to provide today's dish and the appropriate callback function as arguments!
             break
         case "7":
             // TODO #9: Call the appropriate function to generate the marketing email message. 
-            let autoEmailMessage = emailMessage(todaysSpecialDish.name)
-            console.log(autoEmailMessage) 
+            generateMarketingMessage(todaysSpecialDish.name,emailMessage)
             // You will need to provide today's dish and the appropriate callback function as arguments!
             break
         case "Exit":
